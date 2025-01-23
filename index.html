@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will You Be Mine?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .proposal-box {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .proposal-box:hover {
+      transform: scale(1.05);
+    }
+
+    .proposal-box h1 {
+      font-size: 2.5rem;
+      color: #ff6f61;
+      margin-bottom: 10px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .proposal-box p {
+      font-size: 1.2rem;
+      color: #555;
+      margin: 10px 0;
+      transition: color 0.3s ease;
+    }
+
+    .proposal-box p strong {
+      color: #ff6f61;
+    }
+
+    .btn-container {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-yes {
+      background: #ff6f61;
+      color: #fff;
+    }
+
+    .btn-no {
+      background: #ccc;
+      color: #333;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-yes:hover {
+      background: #ff3b30;
+    }
+
+    .btn-no:hover {
+      background: #bbb;
+    }
+
+    /* Scrollable section for second page */
+    .message-box {
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      max-width: 600px;
+      width: 80%;
+      animation: fadeIn 2s ease-out;
+      color: #fff;
+      text-align: center;
+      overflow-y: auto;
+      max-height: 80vh; /* Scrollable */
+      transition: opacity 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .shyari-box {
+      padding: 40px;
+      background: #f8f1f1;
+      border-radius: 15px;
+      color: #333;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .shyari-box p {
+      margin-bottom: 20px;
+    }
+
+    .shyari-box strong {
+      color: #ff6f61;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .proposal-box {
+        width: 95%;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .message-box {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .shyari-box {
+        padding: 25px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="proposal-box">
+    <h1>Hey, You! ❤️</h1>
+    <p>
+      I’ve been wanting to ask this for a while... You make everything brighter, better, and more beautiful. So, here it is:
+    </p>
+    <p><strong>Will you be mine? 🫶</strong></p>
+    <div class="btn-container">
+      <button class="btn btn-yes" onclick="showMessage()">Yes 😍</button>
+      <button class="btn btn-no" id="noBtn" onclick="noClicked()">No 😅</button>
+    </div>
+    <p id="response-message" style="margin-top: 20px; font-weight: bold; color: #333;"></p>
+  </div>
+
+  <div id="thankYouSection" style="display: none;" class="message-box">
+    <h1>Yay! 🥳 You said Yes!</h1>
+    <p>
+      I’m overjoyed that you’ve said yes. 💖
+      Every moment spent with you is a moment I will cherish forever. I promise to always be there for you, to laugh with you, to support you, and to make every day a little brighter. 🌟 You make my life more beautiful in ways I can’t even explain. This is just the beginning of something amazing that we will create together. 💑❤️
+      Let’s make our own story, where every chapter is filled with love, happiness, and unforgettable memories. You are my world, and with you by my side, everything feels right. 🥰
+    </p>
+    <div class="shyari-box">
+      <p><strong>आप ही के बिना हूँ क्यूं बेचैन, क्यूं?</strong></p>
+      <p><strong>आप ही मेरी ज़रूरत है, ख़्वाब इतना सुंदर नहीं होता, bakai, आप ख़ूबसूरत हैं।</strong></p>
+      <p> कि हमें आपसे प्यार है ये जताया है हमनें,</p>
+      <p>आपके चेहरे से नहीं, दिल से दिल लगाया है।</p>
+      <p>पता नहीं क्यूं, आपकी तरफ खींचे आते हैं,</p>
+      <p>पर मेरी जान, कुछ तो ज़रूर है जो हमें आपकी तरफ खींच लाया है। 💖</p>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const responseMessage = document.getElementById('response-message');
+    let noClickCount = 0;
+
+    // Handle "Yes" button click
+    function showMessage() {
+      responseMessage.innerHTML = 'Yay! 🥳 You just made my life a whole lot happier! ❤️';
+      responseMessage.style.color = '#ff6f61';
+      document.querySelector('.proposal-box').style.display = 'none';
+      document.getElementById('thankYouSection').style.display = 'block';
+    }
+
+    // Handle "No" button clicks
+    function noClicked() {
+      noClickCount++;
+      if (noClickCount === 1) {
+        noBtn.style.transform = 'translateX(100px)';
+        noBtn.innerHTML = 'Are you sure? 😅';
+      } else if (noClickCount === 2) {
+        noBtn.style.transform = 'translateX(200px)';
+        noBtn.innerHTML = 'Come on, think again! 🤔';
+      } else if (noClickCount === 3) {
+        noBtn.style.transform = 'translateX(300px)';
+        noBtn.innerHTML = 'You know you want to say yes! 💖';
+      } else {
+        noBtn.style.transform = 'translateX(400px)';
+        noBtn.innerHTML = 'Last chance! 😏';
+      }
+    }
+  </script>
+</body>
+</html>
