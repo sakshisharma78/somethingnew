@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Proposal</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cursive', sans-serif;
+      color: white;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+      animation: backgroundShift 5s infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      }
+      100% {
+        background: linear-gradient(45deg, #fad0c4, #ff9a9e);
+      }
+    }
+
+    .content-wrapper {
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+      cursor: pointer;
+      animation: slideIn 1s ease-out, textGlow 1.5s ease-in-out infinite alternate, partyBomb 0.8s forwards;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+
+    @keyframes textGlow {
+      0% { color: #ff9a9e; text-shadow: 0 0 15px rgba(255, 182, 185, 1), 0 0 25px rgba(255, 182, 185, 1); }
+      100% { color: #ffb6b9; text-shadow: 0 0 30px rgba(255, 182, 185, 1), 0 0 50px rgba(255, 182, 185, 1); }
+    }
+
+    @keyframes partyBomb {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    h1:hover {
+      transform: scale(1.1);
+      color: #ffb6b9;
+      text-shadow: 2px 2px 15px rgba(255, 182, 185, 0.7);
+    }
+
+    .proposal-text {
+      font-size: 1.6rem;
+      margin-top: 20px;
+      text-align: left;
+      animation: fadeIn 4s ease-out, floatText 0.5s ease-in-out infinite, zoomText 0.6s ease-in-out;
+      opacity: 1;
+      letter-spacing: 1px;
+      max-width: 90%;
+      margin: 0 auto;
+      padding-right: 10px;
+      height: 70vh;
+      overflow-y: auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #ffb6b9;  /* Baby Pink */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-top: 30px;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes floatText {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes zoomText {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    .confetti {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      animation: confettiFall 2s linear infinite;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-100%) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    .confetti div {
+      width: 10px;
+      height: 10px;
+      background-color: #ff595e;
+      margin: 5px;
+      opacity: 0.8;
+      animation: confettiAnimation 1.5s ease-in-out infinite;
+    }
+
+    @keyframes confettiAnimation {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(50px) rotate(180deg); }
+      100% { transform: translateY(100px) rotate(360deg); }
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 30px;
+      color: #ff595e;
+      animation: floatHearts 3s ease-in-out infinite;
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    /* Adding more hearts */
+    .heart:nth-child(1) { left: 10%; animation-duration: 3s; }
+    .heart:nth-child(2) { left: 20%; animation-duration: 4s; }
+    .heart:nth-child(3) { left: 30%; animation-duration: 5s; }
+    .heart:nth-child(4) { left: 40%; animation-duration: 3.5s; }
+    .heart:nth-child(5) { left: 50%; animation-duration: 4s; }
+    .heart:nth-child(6) { left: 60%; animation-duration: 5s; }
+    .heart:nth-child(7) { left: 70%; animation-duration: 4.5s; }
+    .heart:nth-child(8) { left: 80%; animation-duration: 3.5s; }
+    .heart:nth-child(9) { left: 90%; animation-duration: 5s; }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .proposal-text {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .proposal-text {
+        font-size: 1.2rem;
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content-wrapper">
+    <h1 onclick="showConfetti()">Romantic Proposal</h1>
+    <div class="proposal-text">
+      In this vast world full of wonders, I’ve found countless things that amaze me,<br>
+      But nothing compares to the way you make me feel, so effortlessly.<br>
+      Every glance you give, every word you speak,<br>
+      Makes my world a little brighter, and my heart a little weak.<br><br>
+
+      I used to wonder what true love really meant,<br>
+      But then you came along, and my heart was content.<br>
+      With you, everything feels so right,<br>
+      And I find myself dreaming of us, every day and night.<br><br>
+
+      I promise to support you, love you, and cherish every moment,<br>
+      To stand by your side, through every storm, every moment.<br>
+      Will you join me in this adventure called life,<br>
+      And make me the happiest person, by becoming my life?<br><br>
+
+      You're the reason my heart skips a beat,<br>
+      The one that makes my life so sweet.<br>
+      With you, I feel alive and complete,<br>
+      A future together would be such a treat.<br><br>
+
+      Through thick and thin, we will stand,<br>
+      Hand in hand, across the land.<br>
+      Together, we will build our dreams,<br>
+      And make life more beautiful than it seems.<br><br>
+
+      So, here I stand with all my heart,<br>
+      Asking you, never to depart.<br>
+      Will you be mine, and share this forever,<br>
+      In every moment, now and forever?<br>
+    </div>
+  </div>
+
+  <div id="confetti" class="confetti"></div>
+
+  <!-- Adding many hearts -->
+  <div class="heart">💖</div>
+  <div class="heart">💘</div>
+  <div class="heart">❤️</div>
+  <div class="heart">💝</div>
+  <div class="heart">💗</div>
+  <div class="heart">💓</div>
+  <div class="heart">💕</div>
+  <div class="heart">💞</div>
+  <div class="heart">💌</div>
+
+  <audio id="background-sound" autoplay loop>
+    <source src="your-romantic-music.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    function showConfetti() {
+      const confetti = document.getElementById('confetti');
+      for (let i = 0; i < 30; i++) {
+        let confettiPiece = document.createElement('div');
+        confetti.appendChild(confettiPiece);
+        confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+      }
+      confetti.style.opacity = 1;
+    }
+
+    window.onload = function() {
+      showConfetti();  // Trigger the confetti and hearts on page load
+    };
+  </script>
+
+</body>
+</html>

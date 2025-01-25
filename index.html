@@ -3,239 +3,311 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Will You Be Mine?</title>
+  <title>Romantic Interactive Page</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
+      perspective: 1000px;
+      animation: gradient 10s ease infinite; /* Background animation */
+      transition: background 3s ease-in-out;
     }
 
-    .proposal-box {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-      width: 90%;
-      max-width: 400px;
-      position: relative;
-      transition: transform 0.3s ease-in-out;
+    @keyframes gradient {
+      0% { background: linear-gradient(to bottom right, #ff9a9e, #fad0c4); }
+      50% { background: linear-gradient(to bottom right, #ffc3a0, #ff6b6b); }
+      100% { background: linear-gradient(to bottom right, #ff9a9e, #fad0c4); }
     }
 
-    .proposal-box:hover {
-      transform: scale(1.05);
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
     }
 
-    .proposal-box h1 {
-      font-size: 2.5rem;
-      color: #ff6f61;
-      margin-bottom: 10px;
-      transition: color 0.3s ease-in-out;
+    .heart {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.8);
+      clip-path: polygon(50% 0%, 100% 33%, 82% 100%, 50% 75%, 18% 100%, 0% 33%);
+      animation: float 6s infinite;
     }
 
-    .proposal-box p {
-      font-size: 1.2rem;
-      color: #555;
-      margin: 10px 0;
-      transition: color 0.3s ease;
-    }
-
-    .proposal-box p strong {
-      color: #ff6f61;
-    }
-
-    .btn-container {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 30px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-yes {
-      background: #ff6f61;
-      color: #fff;
-    }
-
-    .btn-no {
-      background: #ccc;
-      color: #333;
-    }
-
-    .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-yes:hover {
-      background: #ff3b30;
-    }
-
-    .btn-no:hover {
-      background: #bbb;
-    }
-
-    /* Scrollable section for second page */
-    .message-box {
-      padding: 40px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
-      max-width: 600px;
-      width: 80%;
-      animation: fadeIn 2s ease-out;
-      color: #fff;
-      text-align: center;
-      overflow-y: auto;
-      max-height: 80vh; /* Scrollable */
-      transition: opacity 1s ease-in-out;
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
     }
 
     h1 {
       font-size: 3rem;
-      margin-bottom: 15px;
+      color: white;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      animation: shimmer 2s infinite;
+      text-align: center;
     }
 
-    p {
+    @keyframes shimmer {
+      0% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+      50% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 1);
+      }
+      100% {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .yes-btn {
+      background-color: #ff6b6b;
+      color: white;
+    }
+
+    .yes-btn:hover {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+      transform: scale(1.1);
+      animation: sparkle 0.5s infinite alternate;
+    }
+
+    .no-btn {
+      background-color: #ffc3a0;
+      color: white;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .no-btn:hover {
+      transform: scale(1.1);
+      background-color: #ff9a9e; /* Slight pink color */
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes sparkle {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      }
+      100% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+      }
+    }
+
+    @keyframes bounce {
+      0% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(20px);
+      }
+      50% {
+        transform: translateX(-20px);
+      }
+      75% {
+        transform: translateX(10px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .shayari {
+      margin-top: 30px;
       font-size: 1.5rem;
-      margin-bottom: 20px;
+      color: white;
+      font-family: "Cursive";
+      animation: typewriter 4s steps(50) 1;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 3px solid white;
+      text-align: center;
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+    .romantic-paragraph {
+      margin-top: 40px;
+      color: white;
+      font-size: 1.8rem;
+      font-family: 'Cursive', sans-serif;
+      animation: fadeIn 4s ease-out;
+      opacity: 0;
+      text-align: center;
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.8); }
-      100% { opacity: 1; transform: scale(1); }
+      to {
+        opacity: 1;
+      }
     }
 
-    .shyari-box {
-      padding: 40px;
-      background: #f8f1f1;
-      border-radius: 15px;
-      color: #333;
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 20px auto;
+    .new-content {
+      display: none;
       text-align: center;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      margin-top: 50px;
     }
 
-    .shyari-box p {
-      margin-bottom: 20px;
+    .romantic-content {
+      font-size: 1.5rem;
+      color: white;
+      font-family: 'Cursive', sans-serif;
+      animation: fadeIn 4s ease-out;
+      opacity: 0;
+      text-align: center;
     }
 
-    .shyari-box strong {
-      color: #ff6f61;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 600px) {
-      .proposal-box {
-        width: 95%;
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.2rem;
       }
 
       .btn {
-        width: 100%;
-        margin-bottom: 15px;
+        font-size: 1rem;
+        padding: 12px 25px;
       }
 
-      .message-box {
-        padding: 20px;
+      .shayari {
+        font-size: 1.3rem;
+      }
+
+      .romantic-paragraph {
+        font-size: 1.4rem;
+      }
+
+      .romantic-content {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* Additional media query for smaller screens */
+    @media (max-width: 480px) {
+      body {
+        background: linear-gradient(to bottom right, #ff9a9e, #ffcccb);
       }
 
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
 
-      p {
+      .buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .btn {
         font-size: 1rem;
+        padding: 12px 24px;
       }
 
-      .shyari-box {
-        padding: 25px;
+      .shayari {
+        font-size: 1.1rem;
+      }
+
+      .romantic-paragraph {
+        font-size: 1.3rem;
+      }
+
+      .romantic-content {
+        font-size: 1.1rem;
       }
     }
-
   </style>
 </head>
 <body>
-  <div class="proposal-box">
-    <h1>Hey, You! ❤️</h1>
-    <p>
-      I’ve been wanting to ask this for a while... You make everything brighter, better, and more beautiful. So, here it is:
-    </p>
-    <p><strong>Will you be mine? 🫶</strong></p>
-    <div class="btn-container">
-      <button class="btn btn-yes" onclick="showMessage()">Yes 😍</button>
-      <button class="btn btn-no" id="noBtn" onclick="noClicked()">No 😅</button>
+  <div class="hearts"></div>
+  <div class="content">
+    <h1>Will You Be Mine? ❤️</h1>
+    <div class="shayari" id="shayariText">Tumhare bina adhura sa lagta hai, kya tum mere saath chaloge?</div>
+    <div class="buttons">
+      <button class="btn yes-btn" onclick="handleYes()">Yes</button>
+      <button class="btn no-btn" id="noButton" onclick="handleNo()">No</button>
     </div>
-    <p id="response-message" style="margin-top: 20px; font-weight: bold; color: #333;"></p>
-  </div>
-
-  <div id="thankYouSection" style="display: none;" class="message-box">
-    <h1>Yay! 🥳 You said Yes!</h1>
-    <p>
-      I’m overjoyed that you’ve said yes. 💖
-      Every moment spent with you is a moment I will cherish forever. I promise to always be there for you, to laugh with you, to support you, and to make every day a little brighter. 🌟 You make my life more beautiful in ways I can’t even explain. This is just the beginning of something amazing that we will create together. 💑❤️
-      Let’s make our own story, where every chapter is filled with love, happiness, and unforgettable memories. You are my world, and with you by my side, everything feels right. 🥰
-    </p>
-    <div class="shyari-box">
-      <p><strong>आप ही के बिना हूँ क्यूं बेचैन, क्यूं?</strong></p>
-      <p><strong>आप ही मेरी ज़रूरत है, ख़्वाब इतना सुंदर नहीं होता, bakai, आप ख़ूबसूरत हैं।</strong></p>
-      <p> कि हमें आपसे प्यार है ये जताया है हमनें,</p>
-      <p>आपके चेहरे से नहीं, दिल से दिल लगाया है।</p>
-      <p>पता नहीं क्यूं, आपकी तरफ खींचे आते हैं,</p>
-      <p>पर मेरी जान, कुछ तो ज़रूर है जो हमें आपकी तरफ खींच लाया है। 💖</p>
-    </div>
+    <div class="romantic-paragraph" id="romanticParagraph"></div>
   </div>
 
   <script>
-    const noBtn = document.getElementById('noBtn');
-    const responseMessage = document.getElementById('response-message');
-    let noClickCount = 0;
-
-    // Handle "Yes" button click
-    function showMessage() {
-      responseMessage.innerHTML = 'Yay! 🥳 You just made my life a whole lot happier! ❤️';
-      responseMessage.style.color = '#ff6f61';
-      document.querySelector('.proposal-box').style.display = 'none';
-      document.getElementById('thankYouSection').style.display = 'block';
+    // Generate floating hearts
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+      heartsContainer.appendChild(heart);
     }
 
-    // Handle "No" button clicks
-    function noClicked() {
-      noClickCount++;
-      if (noClickCount === 1) {
-        noBtn.style.transform = 'translateX(100px)';
-        noBtn.innerHTML = 'Are you sure? 😅';
-      } else if (noClickCount === 2) {
-        noBtn.style.transform = 'translateX(200px)';
-        noBtn.innerHTML = 'Come on, think again! 🤔';
-      } else if (noClickCount === 3) {
-        noBtn.style.transform = 'translateX(300px)';
-        noBtn.innerHTML = 'You know you want to say yes! 💖';
-      } else {
-        noBtn.style.transform = 'translateX(400px)';
-        noBtn.innerHTML = 'Last chance! 😏';
-      }
+    // Shayari options
+    const shayariList = [
+      'Tumhare bina adhura sa lagta hai, kya tum mere saath chaloge?',
+      'Meri har khushi mein tumhara saath hai, kya tum mujhe apna banaoge?',
+      'Dil ki har ek khwahish tumse judi hai, kya tum is safar mein saath doge?',
+    ];
+
+    let shayariIndex = 0;
+
+    function changeShayari() {
+      const shayariElement = document.getElementById('shayariText');
+      shayariElement.textContent = shayariList[shayariIndex];
+      shayariIndex = (shayariIndex + 1) % shayariList.length;
+    }
+
+    setInterval(changeShayari, 5000);
+
+    // Handle "Yes" button click
+    function handleYes() {
+      window.location.href = 'perposal.html';
+    }
+
+    // Handle "No" button click with bounce animation
+    function handleNo() {
+      const noButton = document.getElementById('noButton');
+      noButton.style.animation = 'bounce 0.5s ease';
+      setTimeout(() => {
+        noButton.style.animation = '';
+      }, 500);
     }
   </script>
 </body>
